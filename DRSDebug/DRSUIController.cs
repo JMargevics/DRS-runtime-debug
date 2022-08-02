@@ -47,7 +47,6 @@ public class DRSUIController : MonoBehaviour
         cd.allowDeepLearningSuperSampling = true;
         cd.deepLearningSuperSamplingUseCustomAttributes = false;
         cd.deepLearningSuperSamplingUseCustomQualitySettings = false;
-        cd.fsrOverrideSharpness = false;
 
         es = this.transform.parent.GetComponentInChildren<EventSystem>();
         
@@ -146,10 +145,9 @@ public class DRSUIController : MonoBehaviour
         minSlider.value = globalDRSSettings.dynamicResolutionSettings.minPercentage;
         maxSlider.value = globalDRSSettings.dynamicResolutionSettings.maxPercentage;
         forcedScreenPercentage.value = globalDRSSettings.dynamicResolutionSettings.forcedPercentage;
-        fsrSharpnessSlider.value = globalDRSSettings.dynamicResolutionSettings.fsrSharpness;
-        enableFSRSharpness.isOn = globalDRSSettings.dynamicResolutionSettings.fsrOverrideSharpness;
+
         DLSSMode.value = (int)globalDRSSettings.dynamicResolutionSettings.DLSSPerfQualitySetting;
-        DLSSInjectionPoint.value = (int)globalDRSSettings.dynamicResolutionSettings.DLSSInjectionPoint;
+
         DLSSSharpness.value = globalDRSSettings.dynamicResolutionSettings.DLSSSharpness;
         DLSSUseOptimal.isOn = globalDRSSettings.dynamicResolutionSettings.DLSSUseOptimalSettings;
 
@@ -195,7 +193,6 @@ public class DRSUIController : MonoBehaviour
     {
         globalDRSSettings.dynamicResolutionSettings.enabled = enableDRSToggle.isOn;
         globalDRSSettings.dynamicResolutionSettings.enableDLSS = enableDLSSToggle.isOn;
-        globalDRSSettings.dynamicResolutionSettings.DLSSInjectionPoint = (DynamicResolutionHandler.UpsamplerScheduleType)DLSSInjectionPoint.value;
         globalDRSSettings.dynamicResolutionSettings.DLSSPerfQualitySetting = (uint)DLSSMode.value;
         globalDRSSettings.dynamicResolutionSettings.DLSSUseOptimalSettings = DLSSUseOptimal.isOn;
         globalDRSSettings.dynamicResolutionSettings.DLSSSharpness = DLSSSharpness.value;
@@ -206,8 +203,7 @@ public class DRSUIController : MonoBehaviour
         globalDRSSettings.dynamicResolutionSettings.maxPercentage = maxSlider.value;
         globalDRSSettings.dynamicResolutionSettings.lowResTransparencyMinimumThreshold = lowResSlider.value;
         globalDRSSettings.dynamicResolutionSettings.rayTracingHalfResThreshold = rayTracedHalfResSlider.value;
-        globalDRSSettings.dynamicResolutionSettings.fsrOverrideSharpness = enableFSRSharpness.isOn;
-        globalDRSSettings.dynamicResolutionSettings.fsrSharpness = fsrSharpnessSlider.value;
+
         globalDRSSettings.dynamicResolutionSettings.useMipBias = useMipToggle.isOn;
         
         SetRenderPipelineSettings(HDRPAsset, globalDRSSettings);
